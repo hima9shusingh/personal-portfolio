@@ -1,0 +1,1027 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Premium Navbar Component | HS. Engineering</title>
+  
+  <!-- Google Fonts: Playfair Display for Serif Monogram, Inter for clean Sans-Serif -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@1,600;1,700&display=swap" rel="stylesheet">
+  
+  <style>
+    /* CSS custom variables defining the requested aesthetic */
+    :root {
+      --bg-cream: #F5EFE6;
+      --bg-cream-alpha: rgba(245, 239, 230, 0.94);
+      --text-brown-dark: #2C1E1B;
+      --text-brown-muted: #6E5D5A;
+      --accent-amber: #D97706;
+      --accent-gold: #C8956C;
+      --border-color: rgba(44, 30, 27, 0.1);
+      
+      --font-serif: 'Playfair Display', Georgia, serif;
+      --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+      
+      --transition-smooth: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-cream);
+      color: var(--text-brown-dark);
+      font-family: var(--font-sans);
+      min-height: 100vh;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    /* ---------------------------------------------------- */
+    /* NAVBAR COMPONENT CSS                                 */
+    /* ---------------------------------------------------- */
+    
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 80px;
+      background-color: var(--bg-cream-alpha);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-color);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      transition: var(--transition-smooth);
+    }
+
+    /* Optional shrink effect on scroll */
+    .navbar.shrink {
+      height: 68px;
+      background-color: var(--bg-cream);
+      box-shadow: 0 4px 20px rgba(44, 30, 27, 0.03);
+    }
+
+    .navbar-container {
+      width: 100%;
+      max-width: 1360px;
+      margin: 0 auto;
+      padding: 0 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    /* Logo Area (Left) */
+    .logo-area {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+      color: var(--text-brown-dark);
+      user-select: none;
+    }
+
+    .logo-monogram {
+      font-family: var(--font-serif);
+      font-weight: 700;
+      font-style: italic;
+      font-size: 25px;
+      letter-spacing: -0.02em;
+      line-height: 1;
+      padding-right: 14px;
+      transition: var(--transition-smooth);
+    }
+
+    .logo-area:hover .logo-monogram {
+      color: var(--accent-gold);
+    }
+
+    .logo-divider {
+      width: 1px;
+      height: 22px;
+      background-color: var(--border-color);
+      margin-right: 14px;
+    }
+
+    .logo-subtitle {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .logo-dot {
+      width: 5px;
+      height: 5px;
+      background-color: var(--accent-amber);
+      border-radius: 50%;
+      display: inline-block;
+      box-shadow: 0 0 6px rgba(217, 119, 6, 0.5);
+    }
+
+    .logo-text {
+      font-size: 9.5px;
+      font-weight: 700;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--text-brown-muted);
+    }
+
+    /* Nav Links (Center - Desktop) */
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      list-style: none;
+    }
+
+    .nav-link-item a {
+      text-decoration: none;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-brown-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.22em;
+      padding: 8px 0;
+      position: relative;
+      transition: var(--transition-smooth);
+    }
+
+    /* Smooth slide underline hover effect */
+    .nav-link-item a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      width: 0;
+      height: 1.5px;
+      background-color: var(--accent-gold);
+      transition: var(--transition-smooth);
+      transform: translateX(-50%);
+    }
+
+    .nav-link-item a:hover {
+      color: var(--text-brown-dark);
+    }
+
+    .nav-link-item a:hover::after {
+      width: 100%;
+    }
+
+    /* CTA Button (Right - Desktop) */
+    .cta-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      text-decoration: none;
+      font-size: 10.5px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-brown-dark);
+      background-color: transparent;
+      border: 1.5px solid var(--text-brown-dark);
+      padding: 11px 22px;
+      position: relative;
+      z-index: 1;
+      overflow: hidden;
+      transition: var(--transition-smooth);
+    }
+
+    /* Subtle hover slide-in with warm gold accent border */
+    .cta-button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background-color: var(--accent-gold);
+      opacity: 0.1;
+      transition: var(--transition-smooth);
+      z-index: -1;
+    }
+
+    .cta-button:hover {
+      color: var(--accent-gold);
+      border-color: var(--accent-gold);
+      box-shadow: 0 0 18px rgba(200, 149, 108, 0.15);
+    }
+
+    .cta-button:hover::before {
+      left: 0;
+    }
+
+    /* Mobile Hamburger Menu Button */
+    .menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 6px;
+      z-index: 1100;
+      position: relative;
+    }
+
+    .menu-toggle svg {
+      width: 24px;
+      height: 24px;
+      stroke: var(--text-brown-dark);
+      fill: none;
+      stroke-width: 1.5;
+      stroke-linecap: round;
+      transition: var(--transition-smooth);
+    }
+
+    /* Hamburger Animation States */
+    .menu-toggle.active svg {
+      stroke: var(--accent-gold);
+    }
+
+    .menu-toggle .line-top,
+    .menu-toggle .line-bottom {
+      transition: var(--transition-smooth);
+    }
+
+    .menu-toggle.active .line-top {
+      transform: rotate(45deg) translate(5px, 5px);
+    }
+
+    .menu-toggle.active .line-middle {
+      opacity: 0;
+    }
+
+    .menu-toggle.active .line-bottom {
+      transform: rotate(-45deg) translate(6px, -6px);
+    }
+
+    /* Mobile Fullscreen Drawer Overlay */
+    .mobile-menu-drawer {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100vh;
+      background-color: var(--bg-cream);
+      z-index: 999;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-10px);
+      transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
+                  visibility 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
+                  transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 40px;
+    }
+
+    .mobile-menu-drawer.active {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .mobile-links {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 32px;
+      list-style: none;
+      margin-bottom: 48px;
+    }
+
+    .mobile-link-item a {
+      text-decoration: none;
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text-brown-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.28em;
+      transition: var(--transition-smooth);
+      display: block;
+      padding: 6px 0;
+    }
+
+    .mobile-link-item a:hover {
+      color: var(--text-brown-dark);
+      transform: translateY(-2px);
+    }
+
+    .mobile-menu-drawer .cta-button {
+      display: inline-flex;
+      width: 80%;
+      max-width: 280px;
+    }
+
+    /* ---------------------------------------------------- */
+    /* PRESENTATION / DOCUMENTATION CONTAINER                */
+    /* ---------------------------------------------------- */
+
+    .presentation-hero {
+      padding: 160px 24px 80px;
+      text-align: center;
+      max-width: 850px;
+      margin: 0 auto;
+    }
+
+    .hero-tagline {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.45em;
+      text-transform: uppercase;
+      color: var(--accent-gold);
+      margin-bottom: 20px;
+    }
+
+    .hero-heading {
+      font-family: var(--font-serif);
+      font-size: 48px;
+      font-weight: 600;
+      line-height: 1.15;
+      font-style: italic;
+      color: var(--text-brown-dark);
+      margin-bottom: 24px;
+    }
+
+    .hero-desc {
+      font-size: 15px;
+      color: var(--text-brown-muted);
+      max-width: 580px;
+      margin: 0 auto 40px;
+    }
+
+    .tabs-wrapper {
+      max-width: 900px;
+      margin: 20px auto 80px;
+      background: #FFFFFF;
+      border: 1px solid var(--border-color);
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(44, 30, 27, 0.04);
+    }
+
+    .tab-headers {
+      display: flex;
+      border-bottom: 1px solid var(--border-color);
+      background-color: rgba(44, 30, 27, 0.02);
+    }
+
+    .tab-btn {
+      flex: 1;
+      padding: 18px;
+      border: none;
+      background: none;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-brown-muted);
+      cursor: pointer;
+      transition: var(--transition-smooth);
+      text-align: center;
+    }
+
+    .tab-btn.active {
+      color: var(--accent-gold);
+      background-color: #FFFFFF;
+      border-top: 2px solid var(--accent-gold);
+    }
+
+    .tab-pane {
+      display: none;
+      padding: 24px;
+      background-color: #1A1211;
+      color: #F3ECE2;
+      overflow-x: auto;
+    }
+
+    .tab-pane.active {
+      display: block;
+    }
+
+    .code-block {
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 12.5px;
+      line-height: 1.5;
+      white-space: pre;
+    }
+
+    .copy-banner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #110B0A;
+      padding: 12px 24px;
+      border-bottom: 1px solid rgba(243, 236, 226, 0.08);
+    }
+
+    .copy-banner span {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent-gold);
+    }
+
+    .btn-copy {
+      background: transparent;
+      border: 1px solid var(--accent-gold);
+      color: var(--accent-gold);
+      padding: 5px 12px;
+      font-size: 9.5px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: var(--transition-smooth);
+    }
+
+    .btn-copy:hover {
+      background-color: var(--accent-gold);
+      color: #110B0A;
+    }
+
+    /* Responsive Breakpoints */
+    @media (max-width: 1024px) {
+      .nav-links, 
+      .navbar-container .cta-button {
+        display: none;
+      }
+
+      .menu-toggle {
+        display: block;
+      }
+
+      .hero-heading {
+        font-size: 36px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ---------------------------------------------------- -->
+  <!-- NAVBAR COMPONENT STRUCTURE                           -->
+  <!-- ---------------------------------------------------- -->
+  <nav class="navbar" id="main-navbar">
+    <div class="navbar-container">
+      
+      <!-- Logo area (left) -->
+      <a href="#home" class="logo-area">
+        <span class="logo-monogram">HS.</span>
+        <div class="logo-divider"></div>
+        <div class="logo-subtitle">
+          <span class="logo-dot"></span>
+          <span class="logo-text">Engineering</span>
+        </div>
+      </a>
+
+      <!-- Nav links (center - Desktop only) -->
+      <ul class="nav-links">
+        <li class="nav-link-item"><a href="#about">About</a></li>
+        <li class="nav-link-item"><a href="#skills">Skills</a></li>
+        <li class="nav-link-item"><a href="#projects">Projects</a></li>
+        <li class="nav-link-item"><a href="#experience">Experience</a></li>
+        <li class="nav-link-item"><a href="#certifications">Certifications</a></li>
+        <li class="nav-link-item"><a href="#contact">Contact</a></li>
+      </ul>
+
+      <!-- CTA button (right - Desktop only) -->
+      <a href="#consultation" class="cta-button">
+        Consultation &nearr;
+      </a>
+
+      <!-- Mobile Hamburger menu button -->
+      <button class="menu-toggle" id="mobile-toggle" aria-label="Toggle Menu" aria-expanded="false">
+        <svg viewBox="0 0 24 24">
+          <line class="line-top" x1="4" y1="6" x2="20" y2="6"></line>
+          <line class="line-middle" x1="4" y1="12" x2="20" y2="12"></line>
+          <line class="line-bottom" x1="4" y1="18" x2="20" y2="18"></line>
+        </svg>
+      </button>
+
+    </div>
+  </nav>
+
+  <!-- Mobile Fullscreen Navigation Overlay -->
+  <div class="mobile-menu-drawer" id="mobile-drawer">
+    <ul class="mobile-links">
+      <li class="mobile-link-item"><a href="#about">About</a></li>
+      <li class="mobile-link-item"><a href="#skills">Skills</a></li>
+      <li class="mobile-link-item"><a href="#projects">Projects</a></li>
+      <li class="mobile-link-item"><a href="#experience">Experience</a></li>
+      <li class="mobile-link-item"><a href="#certifications">Certifications</a></li>
+      <li class="mobile-link-item"><a href="#contact">Contact</a></li>
+    </ul>
+    <a href="#consultation" class="cta-button">
+      Consultation &nearr;
+    </a>
+  </div>
+
+  <!-- ---------------------------------------------------- -->
+  <!-- DEMO HERO PRESENTATION                               -->
+  <!-- ---------------------------------------------------- -->
+  <main class="presentation-hero">
+    <span class="hero-tagline">HTML/CSS Component Template</span>
+    <h1 class="hero-heading">Crafting Functional Layouts.</h1>
+    <p class="hero-desc">
+      A fully responsive, minimal, and premium navigation component styled with vanilla CSS and pure JS. Resize your viewport or tap the menu trigger to inspect interactions.
+    </p>
+
+    <!-- Source Code Panel Tabs -->
+    <div class="tabs-wrapper">
+      <div class="tab-headers">
+        <button class="tab-btn active" onclick="switchTab(event, 'html-code')">HTML Structure</button>
+        <button class="tab-btn" onclick="switchTab(event, 'css-code')">CSS Styles</button>
+        <button class="tab-btn" onclick="switchTab(event, 'js-code')">Vanilla JS</button>
+      </div>
+
+      <!-- HTML Tab -->
+      <div class="tab-pane active" id="html-code">
+        <div class="copy-banner">
+          <span>Component HTML</span>
+          <button class="btn-copy" onclick="copyCode('html-block')">Copy</button>
+        </div>
+        <pre class="code-block" id="html-block">
+&lt;nav class="navbar" id="main-navbar"&gt;
+  &lt;div class="navbar-container"&gt;
+    
+    &lt;!-- Logo area (left) --&gt;
+    &lt;a href="#home" class="logo-area"&gt;
+      &lt;span class="logo-monogram"&gt;HS.&lt;/span&gt;
+      &lt;div class="logo-divider"&gt;&lt;/div&gt;
+      &lt;div class="logo-subtitle"&gt;
+        &lt;span class="logo-dot"&gt;&lt;/span&gt;
+        &lt;span class="logo-text"&gt;Engineering&lt;/span&gt;
+      &lt;/div&gt;
+    &lt;/a&gt;
+
+    &lt;!-- Nav links (center - Desktop) --&gt;
+    &lt;ul class="nav-links"&gt;
+      &lt;li class="nav-link-item"&gt;&lt;a href="#about"&gt;About&lt;/a&gt;&lt;/li&gt;
+      &lt;li class="nav-link-item"&gt;&lt;a href="#skills"&gt;Skills&lt;/a&gt;&lt;/li&gt;
+      &lt;li class="nav-link-item"&gt;&lt;a href="#projects"&gt;Projects&lt;/a&gt;&lt;/li&gt;
+      &lt;li class="nav-link-item"&gt;&lt;a href="#experience"&gt;Experience&lt;/a&gt;&lt;/li&gt;
+      &lt;li class="nav-link-item"&gt;&lt;a href="#certifications"&gt;Certifications&lt;/a&gt;&lt;/li&gt;
+      &lt;li class="nav-link-item"&gt;&lt;a href="#contact"&gt;Contact&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+
+    &lt;!-- CTA button (right - Desktop) --&gt;
+    &lt;a href="#consultation" class="cta-button"&gt;
+      Consultation &amp;nearr;
+    &lt;/a&gt;
+
+    &lt;!-- Mobile Hamburger menu button --&gt;
+    &lt;button class="menu-toggle" id="mobile-toggle" aria-label="Toggle Menu" aria-expanded="false"&gt;
+      &lt;svg viewBox="0 0 24 24"&gt;
+        &lt;line class="line-top" x1="4" y1="6" x2="20" y2="6"&gt;&lt;/line&gt;
+        &lt;line class="line-middle" x1="4" y1="12" x2="20" y2="12"&gt;&lt;/line&gt;
+        &lt;line class="line-bottom" x1="4" y1="18" x2="20" y2="18"&gt;&lt;/line&gt;
+      &lt;/svg&gt;
+    &lt;/button&gt;
+
+  &lt;/div&gt;
+&lt;/nav&gt;
+
+&lt;!-- Mobile Fullscreen Drawer Overlay --&gt;
+&lt;div class="mobile-menu-drawer" id="mobile-drawer"&gt;
+  &lt;ul class="mobile-links"&gt;
+    &lt;li class="mobile-link-item"&gt;&lt;a href="#about"&gt;About&lt;/a&gt;&lt;/li&gt;
+    &lt;li class="mobile-link-item"&gt;&lt;a href="#skills"&gt;Skills&lt;/a&gt;&lt;/li&gt;
+    &lt;li class="mobile-link-item"&gt;&lt;a href="#projects"&gt;Projects&lt;/a&gt;&lt;/li&gt;
+    &lt;li class="mobile-link-item"&gt;&lt;a href="#experience"&gt;Experience&lt;/a&gt;&lt;/li&gt;
+    &lt;li class="mobile-link-item"&gt;&lt;a href="#certifications"&gt;Certifications&lt;/a&gt;&lt;/li&gt;
+    &lt;li class="mobile-link-item"&gt;&lt;a href="#contact"&gt;Contact&lt;/a&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+  &lt;a href="#consultation" class="cta-button"&gt;
+    Consultation &amp;nearr;
+  &lt;/a&gt;
+&lt;/div&gt;</pre>
+      </div>
+
+      <!-- CSS Tab -->
+      <div class="tab-pane" id="css-code">
+        <div class="copy-banner">
+          <span>Component CSS</span>
+          <button class="btn-copy" onclick="copyCode('css-block')">Copy</button>
+        </div>
+        <pre class="code-block" id="css-block">
+/* CSS variables specifying the warm cream and monogram colors */
+:root {
+  --bg-cream: #F5EFE6;
+  --bg-cream-alpha: rgba(245, 239, 230, 0.94);
+  --text-brown-dark: #2C1E1B;
+  --text-brown-muted: #6E5D5A;
+  --accent-amber: #D97706;
+  --accent-gold: #C8956C;
+  --border-color: rgba(44, 30, 27, 0.1);
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --transition-smooth: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 80px;
+  background-color: var(--bg-cream-alpha);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border-color);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  transition: var(--transition-smooth);
+}
+
+.navbar.shrink {
+  height: 68px;
+  background-color: var(--bg-cream);
+  box-shadow: 0 4px 20px rgba(44, 30, 27, 0.03);
+}
+
+.navbar-container {
+  width: 100%;
+  max-width: 1360px;
+  margin: 0 auto;
+  padding: 0 32px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo-area {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: var(--text-brown-dark);
+}
+
+.logo-monogram {
+  font-family: var(--font-serif);
+  font-weight: 700;
+  font-style: italic;
+  font-size: 25px;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  padding-right: 14px;
+}
+
+.logo-divider {
+  width: 1px;
+  height: 22px;
+  background-color: var(--border-color);
+  margin-right: 14px;
+}
+
+.logo-subtitle {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.logo-dot {
+  width: 5px;
+  height: 5px;
+  background-color: var(--accent-amber);
+  border-radius: 50%;
+  display: inline-block;
+  box-shadow: 0 0 6px rgba(217, 119, 6, 0.5);
+}
+
+.logo-text {
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--text-brown-muted);
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  list-style: none;
+}
+
+.nav-link-item a {
+  text-decoration: none;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-brown-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  padding: 8px 0;
+  position: relative;
+  transition: var(--transition-smooth);
+}
+
+.nav-link-item a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 1.5px;
+  background-color: var(--accent-gold);
+  transition: var(--transition-smooth);
+  transform: translateX(-50%);
+}
+
+.nav-link-item a:hover {
+  color: var(--text-brown-dark);
+}
+
+.nav-link-item a:hover::after {
+  width: 100%;
+}
+
+.cta-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  text-decoration: none;
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-brown-dark);
+  background-color: transparent;
+  border: 1.5px solid var(--text-brown-dark);
+  padding: 11px 22px;
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+  transition: var(--transition-smooth);
+}
+
+.cta-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background-color: var(--accent-gold);
+  opacity: 0.1;
+  transition: var(--transition-smooth);
+  z-index: -1;
+}
+
+.cta-button:hover {
+  color: var(--accent-gold);
+  border-color: var(--accent-gold);
+  box-shadow: 0 0 18px rgba(200, 149, 108, 0.15);
+}
+
+.cta-button:hover::before {
+  left: 0;
+}
+
+.menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 6px;
+  z-index: 1100;
+  position: relative;
+}
+
+.menu-toggle svg {
+  width: 24px;
+  height: 24px;
+  stroke: var(--text-brown-dark);
+  fill: none;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  transition: var(--transition-smooth);
+}
+
+.menu-toggle.active svg {
+  stroke: var(--accent-gold);
+}
+
+.menu-toggle .line-top,
+.menu-toggle .line-bottom {
+  transition: var(--transition-smooth);
+}
+
+.menu-toggle.active .line-top {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+
+.menu-toggle.active .line-middle {
+  opacity: 0;
+}
+
+.menu-toggle.active .line-bottom {
+  transform: rotate(-45deg) translate(6px, -6px);
+}
+
+.mobile-menu-drawer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: var(--bg-cream);
+  z-index: 999;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
+              visibility 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
+              transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+}
+
+.mobile-menu-drawer.active {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.mobile-links {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+  list-style: none;
+  margin-bottom: 48px;
+}
+
+.mobile-link-item a {
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-brown-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.28em;
+  transition: var(--transition-smooth);
+  display: block;
+  padding: 6px 0;
+}
+
+.mobile-link-item a:hover {
+  color: var(--text-brown-dark);
+  transform: translateY(-2px);
+}
+
+.mobile-menu-drawer .cta-button {
+  display: inline-flex;
+  width: 80%;
+  max-width: 280px;
+}
+
+@media (max-width: 1024px) {
+  .nav-links, 
+  .navbar-container .cta-button {
+    display: none;
+  }
+  .menu-toggle {
+    display: block;
+  }
+}</pre>
+      </div>
+
+      <!-- JS Tab -->
+      <div class="tab-pane" id="js-code">
+        <div class="copy-banner">
+          <span>Component JavaScript</span>
+          <button class="btn-copy" onclick="copyCode('js-block')">Copy</button>
+        </div>
+        <pre class="code-block" id="js-block">
+document.addEventListener('DOMContentLoaded', () => {
+  const toggleBtn = document.getElementById('mobile-toggle');
+  const drawerOverlay = document.getElementById('mobile-drawer');
+  const navElement = document.getElementById('main-navbar');
+  const mobileLinks = document.querySelectorAll('.mobile-link-item a');
+
+  // Toggle responsive mobile menu drawer
+  const toggleDrawer = () => {
+    const isActive = drawerOverlay.classList.toggle('active');
+    toggleBtn.classList.toggle('active');
+    
+    // Toggle aria state
+    toggleBtn.setAttribute('aria-expanded', isActive);
+    
+    // Lock scrolling while mobile menu is open
+    document.body.style.overflow = isActive ? 'hidden' : 'initial';
+  };
+
+  toggleBtn.addEventListener('click', toggleDrawer);
+
+  // Close mobile drawer when selecting a navigation link
+  mobileLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      if (drawerOverlay.classList.contains('active')) {
+        toggleDrawer();
+      }
+    });
+  });
+
+  // Shrink navbar slightly on scroll
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 20) {
+      navElement.classList.add('shrink');
+    } else {
+      navElement.classList.remove('shrink');
+    }
+  });
+});</pre>
+      </div>
+    </div>
+  </main>
+
+  <!-- ---------------------------------------------------- -->
+  <!-- COMPONENT JAVASCRIPT                                 -->
+  <!-- ---------------------------------------------------- -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const toggleBtn = document.getElementById('mobile-toggle');
+      const drawerOverlay = document.getElementById('mobile-drawer');
+      const navElement = document.getElementById('main-navbar');
+      const mobileLinks = document.querySelectorAll('.mobile-link-item a');
+
+      // Toggle mobile menu drawer
+      const toggleDrawer = () => {
+        const isActive = drawerOverlay.classList.toggle('active');
+        toggleBtn.classList.toggle('active');
+        toggleBtn.setAttribute('aria-expanded', isActive);
+        
+        // Lock body scrolling when active
+        document.body.style.overflow = isActive ? 'hidden' : 'initial';
+      };
+
+      toggleBtn.addEventListener('click', toggleDrawer);
+
+      // Close drawer on click of nav items
+      mobileLinks.forEach(link => {
+        link.addEventListener('click', () => {
+          if (drawerOverlay.classList.contains('active')) {
+            toggleDrawer();
+          }
+        });
+      });
+
+      // Shrink navbar scroll effect
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > 20) {
+          navElement.classList.add('shrink');
+        } else {
+          navElement.classList.remove('shrink');
+        }
+      });
+    });
+
+    /* Tab switcher for demo source code panel */
+    function switchTab(evt, tabId) {
+      const tabPanes = document.querySelectorAll('.tab-pane');
+      const tabBtns = document.querySelectorAll('.tab-btn');
+      
+      tabPanes.forEach(pane => pane.classList.remove('active'));
+      tabBtns.forEach(btn => btn.classList.remove('active'));
+      
+      document.getElementById(tabId).classList.add('active');
+      evt.currentTarget.classList.add('active');
+    }
+
+    /* Clipboard API helper */
+    function copyCode(blockId) {
+      const textToCopy = document.getElementById(blockId).innerText;
+      navigator.clipboard.writeText(textToCopy).then(() => {
+        const btn = document.querySelector(`#${blockId}`).previousElementSibling.querySelector('.btn-copy');
+        const origText = btn.innerText;
+        btn.innerText = 'Copied!';
+        btn.style.borderColor = '#D97706';
+        btn.style.color = '#D97706';
+        setTimeout(() => {
+          btn.innerText = origText;
+          btn.style.borderColor = 'var(--accent-gold)';
+          btn.style.color = 'var(--accent-gold)';
+        }, 1500);
+      }).catch(err => {
+        console.error('Failed to copy content: ', err);
+      });
+    }
+  </script>
+</body>
+</html>
